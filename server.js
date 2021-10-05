@@ -26,25 +26,24 @@ const produtos = [
         res.json(produtos);
         });
     app.post('/produto', (req, res, next) => {
-        const produtos = req.body;
-        produtos.push({ProudId: contador += 1, ProudNome: produtos.ProudNome, ProudUnidade: produtos.ProudUnidade, ProudValorUnidade: produtos.ProudValorUnidade});
-        console.log(produtos);
+        const NovoProduto = req.body;
+        produtos.push({ProudId: contador += 1, ProudNome: NovoProduto.ProudNome, ProudUnidade: NovoProduto.ProudUnidade, ProudValorUnidade: NovoProduto.ProudValorUnidade});
+        console.log(NovoProduto);
         res.end();
             });
     app.put("/produto/:id", (req,res,next)=>{
         const ProdutoComDadosNovos = req.body;
-        const index = produtos.findIndex(c=>c.ProudId === parseInt(req.params.ProudId));
-        const ProdutoParaAtualizar = Produtos[index];
+        const index = produtos.findIndex(c=>c.ProudId === parseInt(req.params.id));
+        const ProdutoParaAtualizar = produtos[index];
                 
-        produtoParaAtualizar.ProudNome =  produtoComDadosNovos.ProudNome;
-        produtoParaAtualizar.ProudUnidade = produtoComDadosNovos.ProudUnidade;
-        produtoParaAtualizar.ProudValorUnidade = produtoComDadosNovos.ProudValorUnidade;
+        ProdutoParaAtualizar.ProudUnidade = ProdutoComDadosNovos.ProudUnidade;
+        ProdutoParaAtualizar.ProudValorUnidade = ProdutoComDadosNovos.ProudValorUnidade;
                 
         res.status(204).send();
             
             });
     app.delete("/produto/:id", (req,res, next)=>{
-        const ProudIdParam = req.params.ProudId;
+        const ProudIdParam = req.params.id;
         const index = produtos.findIndex(c=>c.ProudId === parseInt(ProudIdParam));
         produtos.splice(index,1)
         res.status(204).send();
