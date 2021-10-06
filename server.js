@@ -1,4 +1,5 @@
 const http = require('http');
+const axios = require("axios");
 const express = require('express');
 const app = express();
 const bodyParser = require ('body-parser');
@@ -22,10 +23,10 @@ const produtos = [
     ProudValorUnidade: ''
     }
     ]
-    app.get('/produto', (req, res, next) => {
+    app.get('pedido', (req, res, next) => {
         res.json(produtos);
         });
-    app.post('/produto', (req, res, next) => {
+    app.post('pedido', (req, res, next) => {
         const NovoProduto = req.body;
         produtos.push({ProudId: contador += 1, ProudNome: NovoProduto.ProudNome, ProudUnidade: NovoProduto.ProudUnidade, ProudValorUnidade: NovoProduto.ProudValorUnidade});
         console.log(NovoProduto);
